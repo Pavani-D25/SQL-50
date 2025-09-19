@@ -1,0 +1,52 @@
+📄 LeetCode 584: Find Customer Referee
+🔹 Problem Statement
+
+We are given a Customer table with the following columns:
+
+Column Name	Type	Description
+id	int	Unique identifier for each customer
+name	str	Name of the customer
+referee_id	int	ID of the customer who referred this customer, or NULL if none
+
+We need to **find the names of customers who are not referred by customer with id = 2.
+
+🔹 Example Input
+Customer Table
+id	name	referee_id
+1	Will	NULL
+2	Jane	NULL
+3	Alex	2
+4	Bill	NULL
+5	Zack	1
+6	Mark	2
+🔹 Expected Output
+name
+Will
+Jane
+Bill
+Zack
+
+✅ Explanation:
+
+Alex and Mark are excluded because their referee_id = 2.
+
+All other customers are included.
+
+🔹 SQL Query
+SELECT name
+FROM Customer
+WHERE referee_id <> 2 OR referee_id IS NULL;
+
+🔹 Explanation of Query
+
+FROM Customer → Select from the Customer table.
+
+WHERE referee_id <> 2 → Keeps only customers whose referee is not customer 2.
+
+OR referee_id IS NULL → Also keeps customers who don’t have any referee.
+
+SELECT name → Return only the customer names that meet the condition.
+
+This ensures we exclude only customers referred by id = 2.
+
+
