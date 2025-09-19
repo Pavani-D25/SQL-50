@@ -1,0 +1,53 @@
+📄 LeetCode 1148: Article Views I
+🔹 Problem Statement
+
+We are given a Views table with the following columns:
+
+Column Name	Type	Description
+article_id	int	ID of the article viewed
+author_id	int	ID of the author who wrote the article
+viewer_id	int	ID of the user who viewed the article
+view_date	date	Date when the article was viewed
+
+We need to find all the authors who viewed at least one of their own articles.
+Return result as a list of distinct author IDs, sorted in ascending order.
+
+🔹 Example Input
+Views Table
+article_id	author_id	viewer_id	view_date
+1	3	5	2019-08-01
+1	3	6	2019-08-02
+2	7	7	2019-08-01
+2	7	6	2019-08-02
+4	7	1	2019-07-22
+3	4	4	2019-07-21
+🔹 Expected Output
+id
+4
+7
+
+✅ Explanation:
+
+Author 7 viewed their own article (row 2).
+
+Author 4 viewed their own article (row 6).
+
+Author 3 never viewed their own article.
+
+🔹 SQL Query
+SELECT DISTINCT author_id AS id
+FROM Views
+WHERE author_id = viewer_id
+ORDER BY id;
+
+🔹 Explanation of Query
+
+FROM Views → Work on the Views table.
+
+WHERE author_id = viewer_id → Keep only rows where the author viewed their own article.
+
+SELECT DISTINCT author_id AS id → Output unique author IDs as id.
+
+ORDER BY id → Sort ascending as required.
+
+This ensures we only get authors who are also viewers of their own work.

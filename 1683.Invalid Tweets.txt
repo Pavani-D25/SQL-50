@@ -1,0 +1,49 @@
+📄 LeetCode 1683: Invalid Tweets
+🔹 Problem Statement
+
+We are given a Tweets table with the following columns:
+
+Column Name	Type	Description
+tweet_id	int	The ID of the tweet
+content	varchar	The text content of the tweet
+
+We need to find all tweets that are invalid.
+A tweet is considered invalid if its content length is strictly greater than 15 characters.
+
+🔹 Example Input
+Tweets Table
+tweet_id	content
+1	Vote for Biden
+2	Let us make America great again!
+3	Covid19 is scary
+4	Stay safe!
+🔹 Expected Output
+tweet_id
+2
+
+✅ Explanation:
+
+Tweet 1 → length = 15 → valid
+
+Tweet 2 → length = 32 → invalid
+
+Tweet 3 → length = 16 → invalid
+
+Tweet 4 → length = 10 → valid
+
+So tweets 2 and 3 are invalid.
+
+🔹 SQL Query
+SELECT tweet_id
+FROM Tweets
+WHERE LENGTH(content) > 15;
+
+🔹 Explanation of Query
+
+FROM Tweets → Select from the Tweets table.
+
+WHERE LENGTH(content) > 15 → Filters only tweets longer than 15 characters.
+
+SELECT tweet_id → Return the IDs of invalid tweets.
+
+This ensures we list all invalid tweets according to the character limit rule.
