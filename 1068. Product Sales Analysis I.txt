@@ -1,0 +1,104 @@
+
+## 🔹 Problem Statement
+
+You are given two tables:
+
+### `Sales`
+
+```
++-------------+-------+
+| Column Name | Type  |
++-------------+-------+
+| sale_id     | int   |
+| product_id  | int   |
+| year        | int   |
+| quantity    | int   |
+| price       | int   |
++-------------+-------+
+(sale_id, year) is the primary key.
+product_id is a foreign key to Product table.
+```
+
+### `Product`
+
+```
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| product_id  | int     |
+| product_name| varchar |
++-------------+---------+
+product_id is the primary key.
+```
+
+👉 We need to report:
+
+* `product_name`
+* `year`
+* `price`
+
+from the joined tables.
+
+---
+
+## 🔹 Solution Approach
+
+* We need to **join `Sales` and `Product`** on `product_id`.
+* Only these columns are required: `product_name`, `year`, `price`.
+* `INNER JOIN` is enough because we only want products that actually appear in `Sales`.
+
+---
+
+## 🔹 SQL Query
+
+```sql
+SELECT 
+    p.product_name,
+    s.year,
+    s.price
+FROM Sales s
+JOIN Product p
+ON s.product_id = p.product_id;
+```
+
+---
+
+## 🔹 Example Walkthrough
+
+### Product table
+
+```
+product_id | product_name
+-----------+--------------
+1          | Nokia
+2          | Apple
+3          | Samsung
+```
+
+### Sales table
+
+```
+sale_id | product_id | year | quantity | price
+--------+------------+------+----------+------
+1       | 1          | 2008 | 10       | 5000
+2       | 2          | 2009 | 12       | 7000
+7       | 3          | 2011 | 20       | 8000
+```
+
+### Result
+
+```
+product_name | year | price
+-------------+------+------
+Nokia        | 2008 | 5000
+Apple        | 2009 | 7000
+Samsung      | 2011 | 8000
+```
+
+---
+
+✅ That’s it — simple **INNER JOIN** with column selection.
+
+---
+
+Would you like me to also show **why we don’t need LEFT JOIN here** (unlike problem 1378)?

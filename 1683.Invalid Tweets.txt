@@ -46,4 +46,4 @@ WHERE LENGTH(content) > 15 → Filters only tweets longer than 15 characters.
 
 SELECT tweet_id → Return the IDs of invalid tweets.
 
-This ensures we list all invalid tweets according to the character limit rule.
+This ensures we list all invalid tweets according to the character limit rule. 

@@ -1,0 +1,105 @@
+
+
+### 🔹 What is a **JOIN** in SQL?
+
+A **JOIN** is used to combine rows from two (or more) tables based on a related column.
+
+---
+
+### 🔹 Types of Joins (main ones)
+
+1. **INNER JOIN** → returns only rows that match in both tables.
+2. **LEFT JOIN (LEFT OUTER JOIN)** → returns **all rows from the left table**, and matching rows from the right table. If no match, the right table’s columns become `NULL`.
+3. **RIGHT JOIN** → opposite of LEFT JOIN.
+4. **FULL JOIN** → returns all rows when there’s a match in either table.
+
+---
+
+### 🔹 LEFT JOIN in simple words
+
+Think of **LEFT JOIN** as saying:
+
+👉 “Take everything from the left table. If the right table has a match, show it. If not, put `NULL`.”
+
+---
+
+### 🔹 Example with your problem
+
+#### Employees table (LEFT table)
+
+```
+id | name
+---+-------
+1  | Alice
+7  | Bob
+11 | Meir
+90 | Winston
+3  | Jonathan
+```
+
+#### EmployeeUNI table (RIGHT table)
+
+```
+id | unique_id
+---+-----------
+3  | 1
+11 | 2
+90 | 3
+```
+
+#### LEFT JOIN
+
+```sql
+SELECT e.id, e.name, eu.unique_id
+FROM Employees e
+LEFT JOIN EmployeeUNI eu
+ON e.id = eu.id;
+```
+
+👉 Step-by-step:
+
+* **Alice (id=1)** → No match in EmployeeUNI → `unique_id = NULL`
+* **Bob (id=7)** → No match in EmployeeUNI → `unique_id = NULL`
+* **Meir (id=11)** → Match found → `unique_id = 2`
+* **Winston (id=90)** → Match found → `unique_id = 3`
+* **Jonathan (id=3)** → Match found → `unique_id = 1`
+
+✅ That’s why the result has **all Employees**, and only some have `unique_id`.
+
+---
+
+### 🔹 Visual Diagram
+
+```
+Employees (LEFT)          EmployeeUNI (RIGHT)
++----+----------+         +----+-----------+
+| id | name     |         | id | unique_id |
++----+----------+         +----+-----------+
+| 1  | Alice    |         | 3  | 1         |
+| 7  | Bob      |         | 11 | 2         |
+| 11 | Meir     |         | 90 | 3         |
+| 90 | Winston  |         
+| 3  | Jonathan |
++----+----------+
+
+LEFT JOIN result:
++-----------+----------+
+| unique_id | name     |
++-----------+----------+
+| NULL      | Alice    |
+| NULL      | Bob      |
+| 2         | Meir     |
+| 3         | Winston  |
+| 1         | Jonathan |
++-----------+----------+
+```
+
+---
+
+✨ In short:
+
+* **LEFT JOIN** = keep everyone from the **left table**, match with the right if possible, else fill `NULL`.
+
+---
+
+Do you want me to also explain how the result would **change if we used INNER JOIN** instead of LEFT JOIN?
